@@ -116,7 +116,7 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
                     padding: const EdgeInsets.only(top: 16),
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      print("index: $index");
+                      // print("index: $index");
                       return Conversation(
                         name:
                             "${addressBook['${conversations[index].threadId}']}",
@@ -229,7 +229,8 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
         SmsColumn.BODY,
         SmsColumn.DATE,
         SmsColumn.THREAD_ID,
-        SmsColumn.ID
+        SmsColumn.ID,
+        SmsColumn.TYPE,
       ],
       sortOrder: [
         OrderBy(SmsColumn.DATE, sort: Sort.DESC),
@@ -246,7 +247,8 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
         SmsColumn.BODY,
         SmsColumn.DATE,
         SmsColumn.THREAD_ID,
-        SmsColumn.ID
+        SmsColumn.ID,
+        SmsColumn.TYPE,
       ],
       sortOrder: [
         OrderBy(SmsColumn.DATE, sort: Sort.DESC),

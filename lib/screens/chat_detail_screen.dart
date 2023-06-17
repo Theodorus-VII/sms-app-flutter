@@ -89,7 +89,7 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
                               ),
                               child: Text(
                                 messages[index].body ?? "",
-                                style: TextStyle(fontSize: 15),
+                                style: const TextStyle(fontSize: 15),
                               )),
                         ),
                       );
@@ -188,7 +188,8 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
         SmsColumn.BODY,
         SmsColumn.DATE,
         SmsColumn.THREAD_ID,
-        SmsColumn.ID
+        SmsColumn.ID,
+        SmsColumn.TYPE,
       ],
       filter: SmsFilter.where(SmsColumn.THREAD_ID).equals(id),
       sortOrder: [
@@ -207,7 +208,8 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
         SmsColumn.BODY,
         SmsColumn.DATE,
         SmsColumn.THREAD_ID,
-        SmsColumn.ID
+        SmsColumn.ID,
+        SmsColumn.TYPE,
       ],
       filter: SmsFilter.where(SmsColumn.THREAD_ID).equals(id),
       sortOrder: [
@@ -222,6 +224,7 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
     List<SmsMessage> sent = await getSentById(id);
     List<SmsMessage> history = [...inbox, ...sent];
     history.sort((a, b) => a.date!.compareTo(b.date!));
+    print("TYPE: -------${history[0].type}");
     return history;
   }
 }

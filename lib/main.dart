@@ -12,7 +12,7 @@ void main() {
       primarySwatch: Colors.purple,
     ),
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: const MyApp(),
   ));
 }
 
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
     //         return const CircularProgressIndicator();
     //       }
     //     });
-    return ChatsListScreen();
+    return const ChatsListScreen();
   }
 }
 
