@@ -36,8 +36,7 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Scaffold(
-              body: CircularProgressIndicator(),
-            );
+                body: Center(child: CircularProgressIndicator()));
           }
           final conversations = snapshot.data!['conversations'];
           final addressBook = snapshot.data!['addresses'];
@@ -93,6 +92,8 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
                               "${addressBook['${conversations[index].threadId}']}",
                           snippet: conversations[index].snippet ?? "",
                           threadId: conversations[index].threadId as int,
+                          messageCount:
+                              conversations[index].messageCount as int,
                         );
                       },
                     ),
@@ -168,8 +169,7 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
   Future<List<SmsConversation>> getConversation() async {
     final Telephony telephony = Telephony.instance;
     return await telephony.getConversations(
-      sortOrder: [OrderBy(ConversationColumn.THREAD_ID, sort: Sort.DESC)]
-    );
+        sortOrder: [OrderBy(ConversationColumn.THREAD_ID, sort: Sort.DESC)]);
   }
 
   Future<Map<String, String>> getAddresses() async {

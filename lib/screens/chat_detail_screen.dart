@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sms_mms_app/screens/chat_list_screen.dart';
 import 'package:telephony/telephony.dart';
+import 'package:intl/intl.dart';
 
 class ChatDetailsPage extends StatefulWidget {
   final String name;
@@ -107,19 +108,42 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
                                     SmsType.MESSAGE_TYPE_INBOX
                                 ? Alignment.topLeft
                                 : Alignment.topRight),
-                            child: Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: (messages[index].type ==
-                                          SmsType.MESSAGE_TYPE_INBOX
-                                      ? Colors.grey.shade200
-                                      : Colors.green[200]),
+                            child: Column(
+                              children: [
+                                Container(
+                                  constraints: const BoxConstraints(
+                                      maxWidth: 280, minWidth: 30),
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: (messages[index].type ==
+                                            SmsType.MESSAGE_TYPE_INBOX
+                                        ? Colors.grey.shade200
+                                        : Colors.green[200]),
+                                  ),
+                                  child: Text(
+                                    messages[index].body ?? "",
+                                    style: const TextStyle(fontSize: 15),
+                                  ),
                                 ),
-                                child: Text(
-                                  messages[index].body ?? "",
-                                  style: const TextStyle(fontSize: 15),
-                                )),
+                                // Text('${messages[index].date}')
+                                const SizedBox(height: 2),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.blueGrey[100],
+                                  ),
+                                  padding: const EdgeInsets.only(left:5, right: 5, top: 2, bottom: 2),
+                                  child: Text(
+                                      calculateDate(
+                                          messages[index].date as int),
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w400,
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -203,6 +227,18 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
             ;
           }
         });
+  }
+
+  String calculateDate(int date) {
+    // return DateTime.fromMillisecondsSinceEpoch(date).difference(DateTime.now()).toString();
+    final today = DateTime.now();
+    DateTime rawdate = DateTime.fromMillisecondsSinceEpoch(date);
+    // String formattedDate = DateFormat.yMEd().add_jms().format(rawdate);
+    String formattedDate = DateFormat.jms().format(rawdate);
+    // String formattedDate = DateFormat.yMEd().format(rawdate) + '\n' + DateFormat.yMEd().add_jms().format(rawdate);
+
+    return formattedDate;
+    // return DateTime.fromMillisecondsSinceEpoch(date).toLocal().toString();
   }
 
   _sendMessage(List<String> recipients, String message) async {

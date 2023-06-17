@@ -3,7 +3,7 @@ import 'package:sms_mms_app/screens/chat_list_screen.dart';
 import 'package:telephony/telephony.dart';
 
 class SendNewMessageScreen extends StatefulWidget {
-  final List<String> recipients = [];
+  final List<String> recipients = ['12345687', '12345687', '12345687', '12345687', '12345687', '12345687'];
   SendNewMessageScreen({super.key});
 
   @override
@@ -64,180 +64,193 @@ class _SendNewMessageScreenState extends State<SendNewMessageScreen> {
                                   // Text("Online",style: TextStyle(color: Colors.grey.shade600, fontSize: 13),),
                                 ]))
                           ])))),
-              body: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Row(
-                      children: [
-                        SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: Row(children: [
-                                for (var recipient in widget.recipients)
-                                  Chip(
-                                      label: Text(recipient),
-                                      deleteIcon:
-                                          Icon(Icons.highlight_remove_rounded),
-                                      // deleteIconColor: Colors.red,
-                                      onDeleted: () {
-                                        setState(() {
-                                          widget.recipients.removeAt(widget
-                                              .recipients
-                                              .indexOf(recipient));
-                                        });
-                                      }),
-                              ]),
-                            )),
-                        const Spacer(),
-                        IconButton(
-                            alignment: Alignment.topRight,
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                        scrollable: true,
-                                        title: Text("Add new recipient"),
-                                        content: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8, left: 8, right: 8),
-                                          child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                TextField(
-                                                  controller:
-                                                      newRecipientController,
-                                                  onSubmitted: (value) {
-                                                    setState(() {
-                                                      newRecipientController
-                                                          .text = value;
-                                                    });
-                                                  },
-                                                  decoration:
-                                                      const InputDecoration(
-                                                          labelText:
-                                                              "Enter phone number",
-                                                          icon: Icon(Icons
-                                                              .account_box)),
-                                                ),
-                                                ElevatedButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        widget.recipients.add(
+              body: Container(
+                width: 500,
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                      widthFactor: 1,
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        width: 450,
+                        child: Row(
+                          children: [
+                            SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Container(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, right: 10),
+                                  child: Row(children: [
+                                    for (var recipient in widget.recipients)
+                                      Container(
+                                        margin: const EdgeInsets.only(left: 3, right: 3),
+                                        child: Chip(
+                                            label: Text(recipient),
+                                            deleteIcon:
+                                                const Icon(Icons.remove_circle, color: Color.fromARGB(255, 163, 36, 27),),
+                                            // deleteIconColor: Colors.red,
+                                            onDeleted: () {
+                                              setState(() {
+                                                widget.recipients.removeAt(widget
+                                                    .recipients
+                                                    .indexOf(recipient));
+                                              });
+                                            }),
+                                      ),
+                                  ]),
+                                )),
+                            // const Spacer(),
+                            SizedBox(
+                              width: 40,
+                              child: IconButton(
+                                  alignment: Alignment.topRight,
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                              scrollable: true,
+                                              title: Text("Add new recipient"),
+                                              content: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8, left: 8, right: 8),
+                                                child: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      TextField(
+                                                        controller:
+                                                            newRecipientController,
+                                                        onSubmitted: (value) {
+                                                          setState(() {
                                                             newRecipientController
-                                                                .text);
-                                                        newRecipientController
-                                                            .text = "";
-                                                        Navigator.of(context,
-                                                                rootNavigator:
-                                                                    true)
-                                                            .pop('dialog');
-                                                      });
-                                                    },
-                                                    child: const Text(
-                                                        "Add Recipient"))
-                                              ]),
-                                        ));
-                                  });
-                            },
-                            icon: const Icon(Icons.add))
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  const SizedBox(height: 10),
-                  ListView.builder(
-                    itemCount: messages.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.green[200],
-                              ),
-                              child: Text(
-                                messages[index],
-                                style: const TextStyle(fontSize: 15),
-                              )),
+                                                                .text = value;
+                                                          });
+                                                        },
+                                                        decoration:
+                                                            const InputDecoration(
+                                                                labelText:
+                                                                    "Enter phone number",
+                                                                icon: Icon(Icons
+                                                                    .account_box)),
+                                                      ),
+                                                      ElevatedButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              widget.recipients.add(
+                                                                  newRecipientController
+                                                                      .text);
+                                                              newRecipientController
+                                                                  .text = "";
+                                                              Navigator.of(context,
+                                                                      rootNavigator:
+                                                                          true)
+                                                                  .pop('dialog');
+                                                            });
+                                                          },
+                                                          child: const Text(
+                                                              "Add Recipient"))
+                                                    ]),
+                                              ));
+                                        });
+                                  },
+                                  icon: CircleAvatar(child: const Icon(Icons.person_add_alt_1))),
+                            )
+                          ],
                         ),
-                      );
-                    },
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Container(
-                      padding:
-                          const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-                      height: 60,
-                      width: double.infinity,
-                      color: Colors.white,
-                      child: Row(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: Colors.lightBlue,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Expanded(
-                            child: TextField(
-                              controller: messageController,
-                              onSubmitted: (value) {
-                                messageController.text = value;
-                              },
-                              decoration: const InputDecoration(
-                                  hintText: "Write message...",
-                                  hintStyle: TextStyle(color: Colors.black54),
-                                  border: InputBorder.none),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          FloatingActionButton(
-                            onPressed: () {
-                              setState(() {
-                                _sendMessage(
-                                    widget.recipients, messageController.text);
-                                messages.add(messageController.text);
-                                messageController.text = "";
-                              });
-                            },
-                            backgroundColor: Colors.blue,
-                            elevation: 0,
-                            child: const Icon(
-                              Icons.send,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ),
-                        ],
                       ),
                     ),
-                  ),
-                ],
+                    const Spacer(),
+                    const SizedBox(height: 10),
+                    ListView.builder(
+                      itemCount: messages.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.green[200],
+                                ),
+                                child: Text(
+                                  messages[index],
+                                  style: const TextStyle(fontSize: 15),
+                                )),
+                          ),
+                        );
+                      },
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Container(
+                        padding:
+                            const EdgeInsets.only(left: 10, bottom: 10, top: 10),
+                        height: 60,
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Row(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.lightBlue,
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Expanded(
+                              child: TextField(
+                                controller: messageController,
+                                onSubmitted: (value) {
+                                  messageController.text = value;
+                                },
+                                decoration: const InputDecoration(
+                                    hintText: "Write message...",
+                                    hintStyle: TextStyle(color: Colors.black54),
+                                    border: InputBorder.none),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            FloatingActionButton(
+                              onPressed: () {
+                                setState(() {
+                                  _sendMessage(
+                                      widget.recipients, messageController.text);
+                                  messages.add(messageController.text);
+                                  messageController.text = "";
+                                });
+                              },
+                              backgroundColor: Colors.blue,
+                              elevation: 0,
+                              child: const Icon(
+                                Icons.send,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           } else {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sms_mms_app/screens/chat_list_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,7 +10,15 @@ void main() {
   runApp(MaterialApp(
     title: "SMS App",
     theme: ThemeData(
-      primarySwatch: Colors.purple,
+      useMaterial3: true,
+      primarySwatch: Colors.indigo,
+      appBarTheme: AppBarTheme(
+          color: Colors.indigo,
+          elevation: 2,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          )),
     ),
     debugShowCheckedModeBanner: false,
     home: const MyApp(),

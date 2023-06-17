@@ -5,10 +5,12 @@ class Conversation extends StatefulWidget {
   final String name;
   final String snippet;
   final int threadId;
+  final int? messageCount;
   const Conversation(
       {required this.name,
       required this.snippet,
       required this.threadId,
+      this.messageCount,
       super.key});
 
   @override
@@ -37,8 +39,10 @@ class _ChatItemState extends State<Conversation> {
               const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
           child: Row(
             children: [
-              const CircleAvatar(
-                child: Icon(Icons.person),
+              CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 230, 225, 243),
+                
+                child: Icon(Icons.person_2_outlined, color: Colors.blueGrey[900],),
               ),
               const SizedBox(
                 width: 25,
@@ -57,12 +61,26 @@ class _ChatItemState extends State<Conversation> {
                     Container(
                       // color: Colors.white,
                       padding: const EdgeInsets.all(5),
-                      child: Text(
-                        widget.snippet,
-                        style: TextStyle(
-                            fontSize: 13, color: Colors.grey.shade600),
+                      child: Stack(
+                        children: [Text(
+                          widget.snippet,
+                          style: TextStyle(
+                              fontSize: 13, color: Colors.grey.shade600),
+                        ),
+                        if (widget.messageCount != null)
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircleAvatar(
+                          child: Text('${widget.messageCount}', style: TextStyle(fontSize: 10)),
+                        ),
                       ),
-                    )
+                    )]
+                      ),
+                    ),
+                    
                   ],
                 )),
               )
