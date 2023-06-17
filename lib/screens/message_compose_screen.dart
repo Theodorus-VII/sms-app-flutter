@@ -3,7 +3,7 @@ import 'package:sms_mms_app/screens/chat_list_screen.dart';
 import 'package:telephony/telephony.dart';
 
 class SendNewMessageScreen extends StatefulWidget {
-  final List<String> recipients = ['0923026900'];
+  final List<String> recipients = [];
   SendNewMessageScreen({super.key});
 
   @override
