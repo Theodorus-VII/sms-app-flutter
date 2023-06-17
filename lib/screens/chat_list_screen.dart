@@ -72,44 +72,6 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // SafeArea(
-                  //   child: Padding(
-                  //     padding:
-                  //         const EdgeInsets.only(left: 16, right: 16, top: 10),
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //       children: [
-                  //         const Text(
-                  //           "Messages",
-                  //           style: TextStyle(
-                  //               fontSize: 24, fontWeight: FontWeight.bold),
-                  //         ),
-                  //         Container(
-                  //             padding: const EdgeInsets.only(
-                  //                 left: 8, right: 8, top: 2, bottom: 2),
-                  //             height: 30,
-                  //             decoration: BoxDecoration(
-                  //               borderRadius: BorderRadius.circular(30),
-                  //               color: Colors.pink[50],
-                  //             ),
-                  //             child: IconButton(
-                  //               icon: const Icon(
-                  //                 Icons.add,
-                  //                 color: Colors.pink,
-                  //                 size: 20,
-                  //               ),
-                  //               onPressed: () async {
-                  //                 // add new messages screen goes here
-                  //                 Navigator.push(context,
-                  //                     MaterialPageRoute(builder: (context) {
-                  //                   return SendNewMessageScreen();
-                  //                 }));
-                  //               },
-                  //             )),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   ListView.builder(
                     itemCount: conversations.length,
                     shrinkWrap: true,

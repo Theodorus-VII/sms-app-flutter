@@ -67,12 +67,14 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
               body: Stack(
                 children: <Widget>[
                   ListView.builder(
+                    
                     itemCount: messages.length,
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+                    // physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Container(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        margin: EdgeInsets.only(left: 5, right: 5),
                         child: Align(
                           alignment: (messages[index].type ==
                                   SmsType.MESSAGE_TYPE_INBOX
