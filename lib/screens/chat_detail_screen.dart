@@ -14,6 +14,14 @@ class ChatDetailsPage extends StatefulWidget {
 
 class _ChatDetailsPageState extends State<ChatDetailsPage> {
   final messageController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+
+  // @override
+  // void initState() {
+    // scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -66,38 +74,47 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
                           ])))),
               body: Stack(
                 children: <Widget>[
-                  ListView.builder(
-                    
-                    itemCount: messages.length,
-                    shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        margin: EdgeInsets.only(left: 5, right: 5),
-                        child: Align(
-                          alignment: (messages[index].type ==
-                                  SmsType.MESSAGE_TYPE_INBOX
-                              ? Alignment.topLeft
-                              : Alignment.topRight),
-                          child: Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: (messages[index].type ==
-                                        SmsType.MESSAGE_TYPE_INBOX
-                                    ? Colors.grey.shade200
-                                    : Colors.green[200]),
-                              ),
-                              child: Text(
-                                messages[index].body ?? "",
-                                style: const TextStyle(fontSize: 15),
-                              )),
-                        ),
-                      );
-                    },
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 55),
+                    child: ListView.builder(
+                      itemCount: messages.length,
+                      shrinkWrap: true,
+                      controller: scrollController,
+                      // reverse: true,
+                      // physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          margin: const EdgeInsets.only(
+                            left: 5,
+                            right: 5,
+                          ),
+                          child: Align(
+                            alignment: (messages[index].type ==
+                                    SmsType.MESSAGE_TYPE_INBOX
+                                ? Alignment.topLeft
+                                : Alignment.topRight),
+                            child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: (messages[index].type ==
+                                          SmsType.MESSAGE_TYPE_INBOX
+                                      ? Colors.grey.shade200
+                                      : Colors.green[200]),
+                                ),
+                                child: Text(
+                                  messages[index].body ?? "",
+                                  style: const TextStyle(fontSize: 15),
+                                )),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 15,), 
+                  const SizedBox(
+                    height: 100,
+                  ),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Container(
