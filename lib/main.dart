@@ -12,7 +12,7 @@ void main() {
     theme: ThemeData(
       useMaterial3: true,
       primarySwatch: Colors.indigo,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
           color: Colors.indigo,
           elevation: 2,
           titleTextStyle: TextStyle(
