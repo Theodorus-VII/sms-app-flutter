@@ -18,7 +18,7 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
 
   // @override
   // void initState() {
-    // scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  // scrollController.jumpTo(scrollController.position.maxScrollExtent);
   //   super.initState();
   // }
 
@@ -30,6 +30,19 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
           if (snapshot.hasData) {
             List<SmsMessage> messages = snapshot.data as List<SmsMessage>;
             return Scaffold(
+              // floatingActionButton: SizedBox(
+              //   height: 20,
+              //   width: 20,
+              //   child: FloatingActionButton(
+
+              //       onPressed: () {
+              //         scrollController.animateTo(
+              //             scrollController.position.maxScrollExtent,
+              //             duration: Duration(seconds: 3),
+              //             curve: Curves.elasticIn);
+              //       },
+              //       child: Icon(Icons.keyboard_arrow_down_outlined)),
+              // ),
               appBar: AppBar(
                   elevation: 0,
                   automaticallyImplyLeading: false,
