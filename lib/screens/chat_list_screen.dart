@@ -42,7 +42,12 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
           final conversations = snapshot.data!['conversations'];
           final addressBook = snapshot.data!['addresses'];
           return Scaffold(
-            appBar: AppBar(title: const Text("Messages")),
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: const Text("Messages"),
+              // foregroundColor: Colors.white,
+              // backgroundColor: Colors.black,
+            ),
             floatingActionButton: SizedBox(
               width: 150,
               child: FloatingActionButton(
@@ -51,7 +56,8 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
                     return SendNewMessageScreen();
                   }));
                 },
@@ -161,7 +167,9 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
 
   Future<List<SmsConversation>> getConversation() async {
     final Telephony telephony = Telephony.instance;
-    return await telephony.getConversations();
+    return await telephony.getConversations(
+      sortOrder: [OrderBy(ConversationColumn.THREAD_ID, sort: Sort.DESC)]
+    );
   }
 
   Future<Map<String, String>> getAddresses() async {
