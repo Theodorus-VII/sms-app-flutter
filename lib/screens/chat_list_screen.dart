@@ -71,21 +71,25 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  ListView.builder(
-                    itemCount: conversations.length,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(top: 16),
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      // print("index: $index");
-                      return Conversation(
-                        name:
-                            "${addressBook['${conversations[index].threadId}']}",
-                        snippet: conversations[index].snippet ?? "",
-                        threadId: conversations[index].threadId as int,
-                      );
-                    },
+                  Flexible(
+                    child: ListView.builder(
+                      addAutomaticKeepAlives: true,
+                      itemCount: conversations.length,
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(top: 16),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        // print("index: $index");
+                        return Conversation(
+                          name:
+                              "${addressBook['${conversations[index].threadId}']}",
+                          snippet: conversations[index].snippet ?? "",
+                          threadId: conversations[index].threadId as int,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

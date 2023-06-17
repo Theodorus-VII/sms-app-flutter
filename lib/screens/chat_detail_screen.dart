@@ -97,6 +97,7 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
                       );
                     },
                   ),
+                  const SizedBox(height: 15,), 
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Container(

@@ -34,8 +34,8 @@ class _ChatItemState extends State<Conversation> {
               const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
           child: Row(
             children: [
-              CircleAvatar(
-                child: const Icon(Icons.person),
+              const CircleAvatar(
+                child:  Icon(Icons.person),
               ),
               const SizedBox(
                 width: 25,
