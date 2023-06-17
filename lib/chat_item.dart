@@ -21,31 +21,43 @@ class _ChatItemState extends State<Conversation> {
     return GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ChatDetailsPage(name: widget.name, threadId: "${widget.threadId}",);
+            return ChatDetailsPage(
+              name: widget.name,
+              threadId: "${widget.threadId}",
+            );
           }));
         },
         child: Container(
-          padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+          color: Colors.black12,
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
           child: Row(
             children: [
+              CircleAvatar(
+                child: const Icon(Icons.person),
+              ),
+              const SizedBox(
+                width: 25,
+              ),
               Expanded(
                 child: Container(
-                    color: Colors.transparent,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.name,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          widget.snippet,
-                          style: TextStyle(
-                              fontSize: 13, color: Colors.grey.shade600),
-                        )
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.name,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      widget.snippet,
+                      style:
+                          TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                    )
+                  ],
+                )),
               )
             ],
           ),

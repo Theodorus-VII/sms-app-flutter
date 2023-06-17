@@ -33,9 +33,9 @@ class _SendNewMessageScreenState extends State<SendNewMessageScreen> {
                             IconButton(
                               onPressed: () {
                                 // Navigator.pop(context);
-                                Navigator.push(context,
+                                Navigator.pushReplacement(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return ChatsListScreen();
+                                  return const ChatsListScreen();
                                 }));
                               },
                               icon: const Icon(
@@ -148,7 +148,7 @@ class _SendNewMessageScreenState extends State<SendNewMessageScreen> {
                     ),
                   ),
                   const Spacer(),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   ListView.builder(
                     itemCount: messages.length,
                     shrinkWrap: true,
@@ -241,7 +241,7 @@ class _SendNewMessageScreenState extends State<SendNewMessageScreen> {
               ),
             );
           } else {
-            return Scaffold(
+            return const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             );
           }

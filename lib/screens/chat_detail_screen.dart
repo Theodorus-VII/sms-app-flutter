@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sms_mms_app/screens/chat_list_screen.dart';
 import 'package:telephony/telephony.dart';
 
 class ChatDetailsPage extends StatefulWidget {
@@ -31,7 +32,11 @@ class _ChatDetailsPageState extends State<ChatDetailsPage> {
                           child: Row(children: <Widget>[
                             IconButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return const ChatsListScreen();
+                                }));
                               },
                               icon: const Icon(
                                 Icons.arrow_back,

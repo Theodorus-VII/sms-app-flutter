@@ -6,12 +6,7 @@ import 'package:telephony/telephony.dart';
 class ChatsListScreen extends StatefulWidget {
   ///first screen that launches. shows a list of all conversations
 
-  // final List<SmsConversation> conversations;
-  // final Map<String, String> addressBook;
-  const ChatsListScreen(
-      // {required this.addressBook, required this.conversations, super.key}
-      {super.key});
-  // const ChatsListScreen({super.key});
+  const ChatsListScreen({super.key});
 
   @override
   State<ChatsListScreen> createState() => _ChatsListScreenState();
@@ -28,7 +23,6 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
 
   @override
   void didUpdateWidget(covariant ChatsListScreen oldWidget) {
-    // TODO: implement didUpdateWidget
     setState(() {
       print("pointless");
     });
@@ -41,56 +35,81 @@ class _ChatsListScreenState extends State<ChatsListScreen> {
         stream: streamMessages(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Scaffold(
-              body: Container(child: CircularProgressIndicator()),
+            return const Scaffold(
+              body: CircularProgressIndicator(),
             );
           }
           final conversations = snapshot.data!['conversations'];
           final addressBook = snapshot.data!['addresses'];
           return Scaffold(
+            appBar: AppBar(title: const Text("Messages")),
+            floatingActionButton: SizedBox(
+              width: 150,
+              child: FloatingActionButton(
+                backgroundColor: Colors.indigo,
+                shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                    return SendNewMessageScreen();
+                  }));
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Compose"),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Icon(Icons.add),
+                  ],
+                ),
+              ),
+            ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SafeArea(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16, right: 16, top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Messages",
-                            style: TextStyle(
-                                fontSize: 32, fontWeight: FontWeight.bold),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, top: 2, bottom: 2),
-                              height: 30,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.pink[50],
-                              ),
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.add,
-                                  color: Colors.pink,
-                                  size: 20,
-                                ),
-                                onPressed: () async {
-                                  // add new messages screen goes here
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return SendNewMessageScreen();
-                                  }));
-                                },
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // SafeArea(
+                  //   child: Padding(
+                  //     padding:
+                  //         const EdgeInsets.only(left: 16, right: 16, top: 10),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         const Text(
+                  //           "Messages",
+                  //           style: TextStyle(
+                  //               fontSize: 24, fontWeight: FontWeight.bold),
+                  //         ),
+                  //         Container(
+                  //             padding: const EdgeInsets.only(
+                  //                 left: 8, right: 8, top: 2, bottom: 2),
+                  //             height: 30,
+                  //             decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(30),
+                  //               color: Colors.pink[50],
+                  //             ),
+                  //             child: IconButton(
+                  //               icon: const Icon(
+                  //                 Icons.add,
+                  //                 color: Colors.pink,
+                  //                 size: 20,
+                  //               ),
+                  //               onPressed: () async {
+                  //                 // add new messages screen goes here
+                  //                 Navigator.push(context,
+                  //                     MaterialPageRoute(builder: (context) {
+                  //                   return SendNewMessageScreen();
+                  //                 }));
+                  //               },
+                  //             )),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   ListView.builder(
                     itemCount: conversations.length,
                     shrinkWrap: true,
